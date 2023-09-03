@@ -1,56 +1,35 @@
-import './App.scss'
-import {TodoList} from "./components/TodoList/TodoList";
-import {useCallback, useEffect, useState} from "react";
-import todoStore from "./store/TodoStore/TodoStore";
-import {observer} from "mobx-react";
-import {Search} from "./components/Search/Search";
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
 
+function App() {
+  const [count, setCount] = useState(0)
 
-const App = observer(() => {
-    const [loadMore, setLoadMore] = useState(false)
-    const {todoList, isLoading, getTodoList, totalCount, changeTodoStatus, setSearch} = todoStore
-
-    const getTodoListHandler = useCallback(async (search: string)=>{
-            await setSearch(search)
-    },[setSearch])
-
-    useEffect(() => {
-        if (loadMore) {
-            getTodoList()
-                .finally(() => {
-                    setLoadMore(false)
-                })
-        }
-    }, [getTodoList, loadMore])
-
-    const scrollHandler = useCallback((e: Event) => {
-        const doc = (e.target as Document).documentElement
-        if (doc.scrollHeight - (doc.scrollTop + window.innerHeight) < 100 && todoList.length < totalCount) {
-            setLoadMore(true)
-        }
-    },[todoList.length, totalCount])
-
-    const changeTodoStatusHandler = useCallback(async (id: number, status: boolean) => {
-        await changeTodoStatus(id, status)
-    }, [changeTodoStatus])
-
-    useEffect(() => {
-        document.addEventListener('scroll', scrollHandler)
-        return () => {
-            document.removeEventListener('scroll', scrollHandler)
-        }
-    }, [scrollHandler])
-
-    return (
-        <div className='app'>
-            <Search
-                setSearch={getTodoListHandler}/>
-            <TodoList
-                todoList={todoList}
-                isLoading={isLoading}
-                changeTodoStatusHandler={changeTodoStatusHandler}/>
-        </div>
-    )
-})
+  return (
+    <>
+      <div>
+        <a href="https://vitejs.dev" target="_blank">
+          <img src={viteLogo} className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://react.dev" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+      </div>
+      <h1>Vite + React</h1>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Edit <code>src/App.tsx</code> and save to test HMR
+        </p>
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
+    </>
+  )
+}
 
 export default App
