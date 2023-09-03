@@ -1,0 +1,27 @@
+*{
+  padding: 0;
+  margin: 0;
+  font-style: normal;
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 600;
+  line-height: 140%;
+}
+
+.app{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 20px;
+}
+
+:root{
+  --green-color: #50B810;
+  --blue-color: #3D8FEC;
+  --violet-color: #B233A6;
+  --primary-gray: #7B8AAB;
+  --black-primary: #555;
+  --gray-color: #EBEEF6;
+  --gray-dark-color: #616C82;
+
+  --white-moddle-color: #F4F8FF;
+}

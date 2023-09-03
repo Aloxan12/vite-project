@@ -1,0 +1,100 @@
+.todoItemWrapBg{
+  display: flex;
+  padding: 4px;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+  border-radius: 7px;
+  background: var(--white-moddle-color);
+
+  .todoItemWrap{
+    display: flex;
+    width: 235px;
+    padding: 10px;
+    flex-direction: column;
+    border-radius: 7px;
+    background-color: white;
+    box-shadow: 0 1px 2px 0 #D0DAEB, 0 0 2px 0 #EEF4FE;
+
+    .title{
+      float:left;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 14px;
+      color: var(--blue-color);
+      line-height: 130%;
+    }
+
+    .date{
+      margin-top: 8px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      .dateItem{
+        font-size: 13px;
+        color: var(--green-color);
+      }
+    }
+
+    .description{
+      margin-top: 5px;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--black-primary);
+    }
+    .footer{
+      margin-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .tags{
+        display: flex;
+        gap: 4px;
+        .firstTag{
+          display: flex;
+          padding: 1px 6px 2px 6px;
+          justify-content: center;
+          align-items: center;
+          gap: 8px;
+          border-radius: 4px;
+          background-color: var(--violet-color);
+          font-size: 12px;
+          color: white;
+        }
+        .secondTag{
+          position: relative;
+          display: flex;
+          padding: 1px 0 2px 6px;
+          justify-content: center;
+          align-items: center;
+          gap: 8px;
+          font-size: 12px;
+          color: var(--gray-dark-color);
+          background-color: var(--gray-color);
+          border-radius: 4px 0 0 4px;
+          .corner{
+            position: absolute;
+            top: 0;
+            right: -11px;
+          }
+        }
+      }
+      .avatar{
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+  }
+}
