@@ -1,0 +1,18 @@
+.inputSearch{
+  display: inline-flex;
+  width: 260px;
+  margin: auto;
+  padding: 4px 6px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #ccc;
+  transition: .2s;
+
+  &:hover{
+    border-color: black;
+    transition: .2s;
+  }
+  &:focus{
+    border-color: black;
+  }
+}

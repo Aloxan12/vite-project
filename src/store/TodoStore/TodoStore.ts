@@ -32,16 +32,39 @@ class TodoStore {
         this.todoList = [...this.todoList, ...todoList]
     }
 
-    getTodoList = async () => {
+    getTodoList = async (reset?:boolean) => {
         this.setIsLoading(true)
         try {
             const result = await api.get('todos', { params: { _page: this.page } });
             const totalCount = await result?.headers['x-total-count']
             const todoList = await result.data;
+            if (todoList && reset) {
+                this.setTotalCount(Number(totalCount) || 0)
+                this.setTodoList(todoList);
+                this.setPage(1)
+                return
+            }
             if (todoList) {
                 this.setTotalCount(Number(totalCount) || 0)
                 this.setNextPageTodoList(todoList);
                 this.setPage(this.page + 1)
+                return
+            }
+        } catch (e) {
+            console.log(e);
+        }
+        this.setIsLoading(false)
+    }
+    getTodoListByTitle = async (search: string) => {
+        this.setIsLoading(true)
+        try {
+            const result = await api.get('todos', { params: { _page: 1, title: search } });
+            const totalCount = await result?.headers['x-total-count']
+            const todoList = await result.data;
+            if (todoList) {
+                this.setTotalCount(Number(totalCount) || 0)
+                this.setTodoList(todoList);
+                this.setPage(1)
             }
         } catch (e) {
             console.log(e);
@@ -71,6 +94,7 @@ class TodoStore {
             isLoading: observable,
             page: observable,
             totalCount: observable,
+            getTodoListByTitle: action,
             setTodoList: action,
             setNextPageTodoList: action,
             setPage: action,

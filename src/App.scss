@@ -7,10 +7,15 @@
   line-height: 140%;
 }
 
+body{
+  place-items: start !important;
+}
+
 .app{
   display: flex;
   justify-content: center;
-  width: 100%;
+  flex-direction: column;
+  row-gap: 15px;
   padding: 20px;
 }
 
