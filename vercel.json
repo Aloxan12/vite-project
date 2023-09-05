@@ -4,6 +4,7 @@
   "builds": [
     { "src": "src/main.tsx", "use": "@vercel/node" }
   ],
+  "buildCommand": "vite build",
   "routes": [
     { "src": "/[^.]+", "dest": "src/main.tsx" }
   ]
