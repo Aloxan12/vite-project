@@ -51,7 +51,6 @@ const App = observer(() => {
         <div className='app'>
             <Search
                 placeholder={'Поиск (полное название)'}
-                searchParam='search'
                 setSearch={getTodoListHandler}/>
             <TodoList
                 todoList={todoList}
