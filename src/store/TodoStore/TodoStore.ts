@@ -25,6 +25,10 @@ class TodoStore {
     }
 
     setTodoList(todoList: ITodo[]){
+        this.todoList = todoList
+    }
+
+    setNextPageTodoList(todoList: ITodo[]){
         this.todoList = [...this.todoList, ...todoList]
     }
 
@@ -36,7 +40,23 @@ class TodoStore {
             const todoList = await result.data;
             if (todoList) {
                 this.setTotalCount(Number(totalCount) || 0)
-                this.setTodoList(todoList);
+                this.setNextPageTodoList(todoList);
+                this.setPage(this.page + 1)
+            }
+        } catch (e) {
+            console.log(e);
+        }
+        this.setIsLoading(false)
+    }
+
+    changeTodoStatus = async (id: number, status: boolean) => {
+        this.setIsLoading(true)
+        try {
+            const result = await api.patch(`todos/${id}/`, { completed: status });
+            const todoData = await result.data;
+            if (todoData) {
+                const newTodoList = this.todoList.map(todo => todo.id === todoData.id ? todoData : todo)
+                this.setTodoList(newTodoList);
                 this.setPage(this.page + 1)
             }
         } catch (e) {
@@ -52,8 +72,10 @@ class TodoStore {
             page: observable,
             totalCount: observable,
             setTodoList: action,
+            setNextPageTodoList: action,
             setPage: action,
             getTodoList: action,
+            changeTodoStatus: action,
             setTotalCount: action,
         });
     }

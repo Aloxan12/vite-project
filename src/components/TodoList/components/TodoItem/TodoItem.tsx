@@ -8,6 +8,7 @@ import Corner from '../../../../assets/corner.svg'
 
 interface ITodoItemProps{
     todo: ITodo
+    changeTodoStatusHandler: (id: number, status: boolean) => void
 }
 
 const dateOptions: Intl.DateTimeFormatOptions = {
@@ -18,7 +19,7 @@ const dateOptions: Intl.DateTimeFormatOptions = {
     hour12: true
 }
 const USDate = new Intl.DateTimeFormat("en-US", dateOptions)
-export const TodoItem = memo(({todo}:ITodoItemProps) => {
+export const TodoItem = memo(({todo, changeTodoStatusHandler}:ITodoItemProps) => {
     const fakePastDate = faker.date.past();
     const fakeFutureDate = faker.date.future();
     const description = faker.lorem.sentence(20)
@@ -27,8 +28,12 @@ export const TodoItem = memo(({todo}:ITodoItemProps) => {
         <div className={cls.todoItemWrapBg}>
             <div className={cls.todoItemWrap}>
                 <div className={cls.title}>
-                    <AppCheckbox id={`${todo.id}`} value={todo.completed} />
-                    {todo.title} Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur impedit quod reprehenderit sapiente sit tenetur voluptatibus. Doloremque optio repudiandae ullam?
+                    <AppCheckbox
+                        id={`${todo.id}`}
+                        value={todo.completed}
+                        onChange={(value)=>changeTodoStatusHandler(todo.id, value)}
+                    />
+                    {todo.title}
                 </div>
                 <div className={cls.date}>
                     <div className={cls.dateItem}>{USDate.format(fakePastDate)}</div>
