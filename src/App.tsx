@@ -7,40 +7,34 @@ import {Search} from "./components/Search/Search";
 
 
 const App = observer(() => {
-    const [isMounted, setIsMounted] = useState(false)
     const [loadMore, setLoadMore] = useState(false)
-    const {todoList, isLoading, getTodoList, totalCount, changeTodoStatus, getTodoListByTitle} = todoStore
+    const {todoList, isLoading, getTodoList, totalCount, changeTodoStatus, setSearch} = todoStore
 
-    const getTodoListHandler = useCallback((search: string)=>{
-        if(search){
-            getTodoListByTitle(search)
-        }else{
-            getTodoList(true)
-        }
-    },[getTodoList, getTodoListByTitle])
+    const getTodoListHandler = useCallback(async (search: string)=>{
+            await setSearch(search)
+    },[setSearch])
 
     useEffect(() => {
-        if (loadMore && isMounted) {
+        if (loadMore) {
             getTodoList()
                 .finally(() => {
                     setLoadMore(false)
                 })
         }
-    }, [loadMore, isMounted])
+    }, [getTodoList, loadMore])
 
-    const scrollHandler = (e: Event) => {
-        console.log('nen')
+    const scrollHandler = useCallback((e: Event) => {
         const doc = (e.target as Document).documentElement
         if (doc.scrollHeight - (doc.scrollTop + window.innerHeight) < 100 && todoList.length < totalCount) {
             setLoadMore(true)
         }
-    }
+    },[todoList.length, totalCount])
+
     const changeTodoStatusHandler = useCallback(async (id: number, status: boolean) => {
         await changeTodoStatus(id, status)
     }, [changeTodoStatus])
 
     useEffect(() => {
-        setIsMounted(true)
         document.addEventListener('scroll', scrollHandler)
         return () => {
             document.removeEventListener('scroll', scrollHandler)
@@ -50,7 +44,6 @@ const App = observer(() => {
     return (
         <div className='app'>
             <Search
-                placeholder={'Поиск (полное название)'}
                 setSearch={getTodoListHandler}/>
             <TodoList
                 todoList={todoList}
