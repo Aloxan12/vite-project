@@ -23,7 +23,7 @@ export const Search = memo(({ placeholder, setSearch}:Search ) => {
     }
     return (
         <input
-            placeholder={placeholder || 'Поиск'}
+            placeholder={placeholder || 'Поиск...'}
             type="text"
             value={searchIn}
             className={cls.inputSearch}
