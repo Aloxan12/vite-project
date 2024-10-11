@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "node",
+  "builds": [
+    { "src": "src/main.ts", "use": "@vercel/vite-project" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "src/index.ts" }
+  ]
+}
