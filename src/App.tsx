@@ -4,6 +4,7 @@ import {useCallback, useEffect, useState} from "react";
 import todoStore from "./store/TodoStore/TodoStore";
 import {observer} from "mobx-react";
 import {Search} from "./components/Search/Search";
+import {StreetSearch} from "./components/StreetSearch/StreetSearch.tsx";
 
 
 const App = observer(() => {
@@ -43,6 +44,7 @@ const App = observer(() => {
 
     return (
         <div className='app'>
+            <StreetSearch />
             <Search
                 setSearch={getTodoListHandler}/>
             <TodoList
