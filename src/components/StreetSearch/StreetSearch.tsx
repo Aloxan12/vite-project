@@ -17,9 +17,10 @@ export const StreetSearch = () => {
 
         try {
             const response = await axios.get(
-                `https://nominatim.openstreetmap.org/search?street=${street}&city=${city}&format=json&addressdetails=1&accept-language=ru`
+                // `https://nominatim.openstreetmap.org/search?q=${street}, ${city}, Россия&countrycodes=RU&format=json&addressdetails=1&limit=10&accept-language=ru`
+                `https://photon.komoot.io/api/?q=${street}, ${city}&limit=10`
             );
-
+            console.log('response')
             setResults(response.data);
         } catch (error) {
             console.error('Ошибка при поиске улицы:', error);
