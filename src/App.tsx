@@ -5,6 +5,7 @@ import todoStore from "./store/TodoStore/TodoStore";
 import {observer} from "mobx-react";
 import {Search} from "./components/Search/Search";
 import {StreetSearch} from "./components/StreetSearch/StreetSearch.tsx";
+import {PixiHallConfiguratorWrap} from "./PixiHallConfigurator/PixiHallConfiguratorWrap.tsx";
 
 
 const App = observer(() => {
@@ -44,13 +45,14 @@ const App = observer(() => {
 
     return (
         <div className='app'>
-            <StreetSearch />
-            <Search
-                setSearch={getTodoListHandler}/>
-            <TodoList
-                todoList={todoList}
-                isLoading={isLoading}
-                changeTodoStatusHandler={changeTodoStatusHandler}/>
+            <PixiHallConfiguratorWrap />
+            {/*<StreetSearch />*/}
+            {/*<Search*/}
+            {/*    setSearch={getTodoListHandler}/>*/}
+            {/*<TodoList*/}
+            {/*    todoList={todoList}*/}
+            {/*    isLoading={isLoading}*/}
+            {/*    changeTodoStatusHandler={changeTodoStatusHandler}/>*/}
         </div>
     )
 })
