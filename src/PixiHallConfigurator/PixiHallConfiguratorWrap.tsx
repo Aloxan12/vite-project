@@ -1,6 +1,5 @@
 import {useCallback, useEffect, useMemo, useState} from 'react';
 import {PixiHallConfigurator, PlacesIds, SeatData} from "./PixiHallConfigurator.tsx";
-import {useGetImage} from "../otherHooks/useGetImage.ts";
 import { useGetPlaces } from '../otherHooks/useGetPlaces.ts';
 import {getRow} from "./helpers/getRow.ts";
 import {getSector } from './helpers/getSector.ts';
@@ -9,7 +8,7 @@ import {useSvgToCanvas} from "./hooks/useSvgToCanvas.ts";
 
 type Tab = 'seat' | 'row' | 'sect'
 
-const svgUrl = 'https://pre-dev.kassir.grpc.fox-dev.ru//files/download/30f045da4ee56c8af93397e540b76458b77e34da'
+const svgUrl ='./Стадион_Екатеринбург_Арена.svg' // 'https://pre-dev.kassir.grpc.fox-dev.ru//files/download/30f045da4ee56c8af93397e540b76458b77e34da'
 
 const SVG_SCALE = 3;
 
